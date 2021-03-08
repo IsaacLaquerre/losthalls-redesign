@@ -8,7 +8,7 @@
 
     <style>
         @media screen and (max-width: 945px) {
-            .hor-list { 
+            .hor-list li:not(#runeCheck) { 
                 float: left;
                 padding: 1px;
             }
@@ -32,6 +32,11 @@
             color: white;
             font-weight: normal;
         }
+        h3 {
+            color: white;
+            font-weight: normal;
+            font-size: 12pt;
+        }
 
         #discord {
             background-color: rgb(138,156,254);
@@ -54,6 +59,9 @@
         #discord svg {
             width: 20pt;
             margin-right: 5px;
+        }
+        #runeCheck .hor-list {
+            width: 60%;
         }
 
         .center {
@@ -133,6 +141,26 @@
             list-style: none;
             display: flex;
             width: 50vw;
+        }
+        .runeCheckButton {
+            transition: 0.5s ease-out;
+            background-color: rgb(25,25,25);
+            border: 1px solid rgb(20, 20, 20);
+            border-radius: 5px;
+            padding: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .runeCheckButton:hover {
+            color: rgb(74, 82, 124);
+            filter: brightness(150%);
+            border: 1px solid rgb(20, 20, 20);
+        }
+        .runeCheckButton.clicked {
+            color: rgb(74, 82, 124);
+            filter: brightness(150%);
         }
         .progressbar {
             border-radius: 10px;
@@ -217,6 +245,38 @@
     </div>
 
     <div class="body">
+
+        <div class="container center" id="runeCheck" style="height: 250px; width: 550px;">
+            <h2 class="center">Rune Check</h2>
+            <h3 class="center">Click any of the following if you have at least one of its kind and are willing to pop it.</h3>
+            <ul class="hor-list center">
+                <li>
+                    <div class="runeCheckButton" onclick="runeCheck(this)">
+                        <img src="assets/images/inc.png" alt="Wine Cellar Incantation" title="Wine Cellar Incantation" width="64">
+                        <span id="incAmount">0</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="runeCheckButton" onclick="runeCheck(this)">
+                        <img src="assets/images/shield.png" alt="Shield Rune" title=Shield Rune width="64">
+                        <span id="shieldAmount">0</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="runeCheckButton" onclick="runeCheck(this)">
+                        <img src="assets/images/sword.png" alt="Sword Rune" title="Sword Rune" width="64">
+                        <span id="swordAmount">0</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="runeCheckButton" onclick="runeCheck(this)">
+                        <img src="assets/images/helm.png" alt="Helmet Rune" title="Helmet Rune" width="64">
+                        <span id="helmAmount">0</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <ul class="hor-list">
             <li class="center" id="raids">
                 <h2 class="center">Raids</h2>
@@ -321,6 +381,44 @@
                     var percentage = (parseInt(percentageArray[0]) / parseInt(percentageArray[1])) * 100;
                     el.style.background = "linear-gradient(to right, " + colors[el.classList[1]][0] + percentage + "%, " + colors[el.classList[1]][1] + " " + percentage + "%)"
                 }
+            }
+        }
+
+        setRunes();
+    }
+
+    function runeCheck(el) {
+        if (el.classList.contains("clicked")) {
+            el.classList.remove("clicked")
+            if (window.localStorage.getItem(el.children[1].id) == null) {
+                window.localStorage.setItem(el.children[1].id, 0)
+            }else {
+                var amount = parseInt(window.localStorage.getItem(el.children[1].id));
+                console.log(el.children[1].id + ": " + amount)
+                amount--;
+                el.children[1].innerHTML = amount;
+                window.localStorage.setItem(el.children[1].id, amount);
+            }
+        }else {
+            el.classList.add("clicked")
+            if (window.localStorage.getItem(el.children[1].id) == null) {
+                window.localStorage.setItem(el.children[1].id, 0)
+            }else {
+                var amount = parseInt(window.localStorage.getItem(el.children[1].id));
+                console.log(el.children[1].id + ": " + amount)
+                amount++;
+                el.children[1].innerHTML = amount;
+                window.localStorage.setItem(el.children[1].id, amount);
+            }
+        }
+    }
+
+    function setRunes() {
+        for (i in document.getElementsByClassName("runeCheckButton")) {
+            if (document.getElementsByClassName("runeCheckButton")[i] === undefined || document.getElementsByClassName("runeCheckButton")[i].children === undefined) return;
+            console.log(document.getElementsByClassName("runeCheckButton")[i])
+            if (window.localStorage.getItem(document.getElementsByClassName("runeCheckButton")[i].children[1].id) === null) {
+                window.localStorage.setItem(document.getElementsByClassName("runeCheckButton")[i].children[1].id, 0)
             }
         }
     }
