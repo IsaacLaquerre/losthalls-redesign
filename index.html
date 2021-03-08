@@ -7,6 +7,19 @@
     <link rel="sortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
 
     <style>
+        @media screen and (max-width: 945px) {
+            .hor-list { 
+                float: left;
+                padding: 1px;
+            }
+        }
+
+        @media screen and (min-width: 945px) {
+            .hor-list {
+                margin: auto;
+            }
+        }
+
         html {
             background-color: rgb(36,36,36);
             font-family: "Segoe UI";
@@ -49,11 +62,12 @@
         }
         .header {
             background-color: rgb(29,29,29);
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 60px;
+            z-index: 100;
         }
         .navlist {
             align-content: center;
@@ -77,11 +91,12 @@
         }
         .body {
             margin-top: 15vh;
-            width: 99vw;
+            position: absolute;
+            left: 0;
+            right: 0;
         }
         .body ul ::-webkit-scrollbar {
             width: 8px;
-            margin-right: 5px;
         }
         .body ul ::-webkit-scrollbar-thumb {
             background-color: #696969;
@@ -94,12 +109,13 @@
             width: 5px;
         }
         .container {
+            display: block;
             background-color: rgb(29,29,29);
             border-radius: 15px;
             padding: 15px 10px 15px 10px;
             height: 365px;
             width: 300px;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
         .container li {
             margin-bottom: 15px;
@@ -109,7 +125,7 @@
             justify-content: space-between;
             list-style: none;
             display: flex;
-            margin: 0 15rem;
+            width: 50vw;
         }
         .progressbar {
             border-radius: 10px;
@@ -142,26 +158,14 @@
         .oryx {
             background-color: rgb(111,104,104);
         }
-        .oryx .progress {
-            background-color: rgb(49, 46, 46);
-        }
         .realmclearing {
             background-color: rgb(241,141,31);
-        }
-        .realmclearing .progress {
-            background-color: rgb(184,102,12);
         }
         .void {
             background-color: rgb(167,120,255);
         }
-        .void .progress {
-            background-color: rgb(141,81,255);
-        }
         .cult {
             background-color: rgb(255,85,89);
-        }
-        .cult .progress {
-            background-color: rgb(255,36,41);
         }
     </style>
 
@@ -206,7 +210,7 @@
     </div>
 
     <div class="body">
-        <ul class="hor-list center">
+        <ul class="hor-list">
             <li class="center" id="raids">
                 <h2 class="center">Raids</h2>
                 <div class="container" id="raidsBoard">
@@ -257,7 +261,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="center" id="realmclearing" style="margin-left: 10vw;">
+            <li class="center" id="realmclearing">
                 <h2 class="center">Realm Clearing</h2>
                 <div class="container" id="realmclearingBoard">
                     <ul class="center" style="list-style: none; overflow: auto;">
@@ -301,7 +305,6 @@
                 if (el.classList.contains("started")) {
                     var percentageArray = el.children[1].innerHTML.split("/")
                     var percentage = (parseInt(percentageArray[0]) / parseInt(percentageArray[1])) * 100;
-                    console.log(percentage)
                     el.style.background = "linear-gradient(to right, " + colors[el.classList[1]][0] + percentage + "%, " + colors[el.classList[1]][1] + " " + percentage + "%)"
                 }
             }
