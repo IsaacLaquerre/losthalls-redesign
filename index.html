@@ -34,7 +34,7 @@
         }
 
         #discord {
-            background-color: rgb(167,120,255);
+            background-color: rgb(138,156,254);
             border-radius: 5px;
             float: right;
             padding: 10px;
@@ -42,9 +42,10 @@
             justify-content: center;
             align-items: center;
             margin: 8px;
-        }
-        #discord {
             color: white;
+        }
+        #discord:hover {
+            background-color: rgb(116, 129, 197);
         }
         #discord span {
             align-items: center;
@@ -68,6 +69,12 @@
             right: 0;
             height: 60px;
             z-index: 100;
+        }
+        .header .navbutton:not(.active):hover {
+            color: rgb(211, 211, 211)
+        }
+        .header .navbutton.active:hover {
+            color: rgb(187, 132, 238)
         }
         .navlist {
             align-content: center;
@@ -254,14 +261,14 @@
                         </li>
                         <li>
                             <div class="progressbar void">
-                                <span class="title">Testing silder</span>
-                                <span class="players">time</span>
+                                <span class="title">Void by BlazePig</span>
+                                <span class="players">16:52</span>
                             </div>
                         </li>
                         <li>
                             <div class="progressbar oryx">
-                                <span class="title">Testing silder</span>
-                                <span class="players">time</span>
+                                <span class="title">Oryx Run by Slay</span>
+                                <span class="players">2:56</span>
                             </div>
                         </li>
                     </ul>
@@ -277,6 +284,7 @@
                                 <span class="players">61/85</span>
                             </div>
                         </li>
+                        <div class="seperator"></div>
                     </ul>
                 </div>
             </li>
