@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LostHalls - Raids</title>
+    <title>Pub Halls</title>
     <link rel="sortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
 
     <style>
@@ -23,6 +23,7 @@
         html {
             background-color: rgb(36,36,36);
             font-family: "Segoe UI";
+            position: relative;
         }
         a {
             text-decoration: none;
@@ -62,6 +63,7 @@
         }
         #runeCheck .hor-list {
             width: 60%;
+            height: 50px;
         }
 
         .center {
@@ -106,9 +108,10 @@
         }
         .body {
             margin-top: 15vh;
-            position: absolute;
             left: 0;
             right: 0;
+            width: 100%;
+            position: relative
         }
         .body ul ::-webkit-scrollbar {
             width: 8px;
@@ -202,6 +205,30 @@
         }
         .cult {
             background-color: rgb(255,85,89);
+        }
+
+        .spacer {
+            width: 100%;
+            position: relative;
+            height: 100px;
+        }
+
+        .footer {
+            position: relative;
+            top: 100%;
+            bottom: 100%;
+            width: 100%;
+            height: 25vh;
+            text-align: center;
+            background-color: rgb(29,29,29);
+        }
+        .footer-body {
+            display: inline-block;
+            padding: 10px;
+            padding-top: 25px;
+            margin: auto;
+            text-align: center;
+            color: white;
         }
     </style>
 
@@ -352,6 +379,15 @@
         </ul>
     </div>
 
+    <div class="spacer" style="height: 50px;"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-body">
+            <span>Design made by cunt#4811</span>
+        </div>
+    </div>
+
 </body>
 
 <script>
@@ -393,6 +429,7 @@
             el.classList.remove("clicked")
             if (window.localStorage.getItem(el.children[1].id) == null) {
                 window.localStorage.setItem(el.children[1].id, 0)
+                el.children[1].innerHTML = 0;
             }else {
                 var amount = parseInt(window.localStorage.getItem(el.children[1].id));
                 console.log(el.children[1].id + ": " + amount)
@@ -403,10 +440,10 @@
         }else {
             el.classList.add("clicked")
             if (window.localStorage.getItem(el.children[1].id) == null) {
-                window.localStorage.setItem(el.children[1].id, 0)
+                window.localStorage.setItem(el.children[1].id, 1)
+                el.children[1].innerHTML = 1;
             }else {
                 var amount = parseInt(window.localStorage.getItem(el.children[1].id));
-                console.log(el.children[1].id + ": " + amount)
                 amount++;
                 el.children[1].innerHTML = amount;
                 window.localStorage.setItem(el.children[1].id, amount);
@@ -417,10 +454,10 @@
     function setRunes() {
         for (i in document.getElementsByClassName("runeCheckButton")) {
             if (document.getElementsByClassName("runeCheckButton")[i] === undefined || document.getElementsByClassName("runeCheckButton")[i].children === undefined) return;
-            console.log(document.getElementsByClassName("runeCheckButton")[i])
             if (window.localStorage.getItem(document.getElementsByClassName("runeCheckButton")[i].children[1].id) === null) {
                 window.localStorage.setItem(document.getElementsByClassName("runeCheckButton")[i].children[1].id, 0)
             }
+            document.getElementsByClassName("runeCheckButton")[i].children[1].innerHTML = window.localStorage.getItem(document.getElementsByClassName("runeCheckButton")[i].children[1].id)
         }
     }
 </script>
